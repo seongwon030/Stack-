@@ -1,0 +1,46 @@
+import sys
+
+input = sys.stdin.readline
+
+n = int(input())
+
+k=[]
+for i in range(n):
+  k.append(int(input()))
+
+k1 = k.copy()
+k1.reverse()
+
+i=1
+t=[]  # 스택 
+t1=[] # 수열
+ans=[]   # 플러스 마이너스  
+while i <= n:
+  if not t:
+    t.append(i)
+    ans.append('+')
+    i+=1
+  else:
+    if t[-1]==k1[-1]:
+      t1.append(t[-1])
+      t.pop()
+      k1.pop()
+      ans.append('-')
+    else:
+      t.append(i)
+      ans.append('+')
+      i+=1
+      if t[-1]==k1[-1]:
+        t1.append(t[-1])
+        t.pop()
+        k1.pop()
+        ans.append('-')
+for i in range(len(t)):
+  ans.append('-')
+  t1.append(t[len(t)-i-1])
+
+if t1==k:
+  for i in range(len(ans)):
+    print(ans[i])
+else:
+  print('NO')
